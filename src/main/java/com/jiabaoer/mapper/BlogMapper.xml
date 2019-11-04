@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiabaoer.mapper.BlogMapper">
+    <resultMap id="BaseResultMap" type="com.jiabaoer.pojo.Blog">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="bg_title" property="bgTitle" jdbcType="VARCHAR"/>
+        <result column="bg_time" property="bgTime" jdbcType="VARCHAR"/>
+        <result column="bg_profile" property="bgProfile" jdbcType="VARCHAR"/>
+        <result column="bg_praise" property="bgPraise" jdbcType="BIGINT"/>
+        <result column="type_id" property="typeId" jdbcType="VARCHAR"/>
+        <result column="bg_content" property="bgContent" jdbcType="LONGVARCHAR"/>
+        <result column="bg_coverFile" property="bgCoverFile" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <association property="blogType" javaType="com.jiabaoer.pojo.BlogType">
+            <id column="bt_id" property="btId" jdbcType="VARCHAR"/>
+            <result column="bt_name" property="btName" jdbcType="VARCHAR"/>
+        </association>
+        <association property="user" javaType="com.jiabaoer.pojo.User">
+            <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        </association>
+        <collection property="commentsList" resultMap="BaseResultCommentsMap"/>
+    </resultMap>
+    <resultMap id="BaseResultCommentsMap" type="com.jiabaoer.pojo.Comments">
+        <id column="com_id" property="comId" jdbcType="VARCHAR"/>
+        <result column="con_id" property="conId" jdbcType="VARCHAR"/>
+        <result column="com_time" property="comTime" jdbcType="TIMESTAMP"/>
+        <result column="com_name" property="comName" jdbcType="VARCHAR"/>
+        <result column="com_state" property="comState" jdbcType="INTEGER"/>
+        <result column="com_text" property="comText" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <insert id="insertBlog" parameterType="com.jiabaoer.pojo.Blog">
+    insert into blog
+    values (#{id},#{bgTitle},#{bgTime},#{bgProfile},#{bgContent},#{bgCoverFile},0,#{typeId},#{userId})
+    </insert>
+
+    <delete id="delBlogByIdList" parameterType="java.util.List">
+        delete blog,comments from blog LEFT JOIN comments on blog.id=comments.con_id
+        <where>
+            <foreach item="id" separator="," open="id in (" close=")" collection="list">#{id}</foreach>
+        </where>
+    </delete>
+
+    <update id="updateBlog" parameterType="com.jiabaoer.pojo.Blog">
+        update blog
+        <set>
+            bg_title=#{bgTitle},bg_profile=#{bgProfile},bg_content=#{bgContent},bg_coverFile=#{bgCoverFile},type_id=#{typeId}
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <update id="updateBlogPraise" parameterType="com.jiabaoer.pojo.Blog">
+        update blog
+        <set>
+            bg_title=#{bgTitle},bg_profile=#{bgProfile},bg_content=#{bgContent},bg_coverFile=#{bgCoverFile},bg_praise=#{bgPraise},type_id=#{typeId}
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <select id="selectBlogPageList" resultMap="BaseResultMap" parameterType="map">
+        select * from blog b LEFT JOIN blogtype bt on b.type_id=bt.bt_id limit #{pageStart},#{pageSize}
+    </select>
+    <select id="selectByIdBlogAndTypeShow" resultMap="BaseResultMap" parameterType="string">
+        select * from blog b LEFT JOIN blogtype bt on b.type_id=bt.bt_id left join comments c on b.id=c.con_id left join
+        user u on u.id=c.user_id
+        <where>b.id=#{0}</where>
+    </select>
+
+    <select id="selectBlogByThree" resultMap="BaseResultMap">
+        select * from blog,blogtype,user where blog.type_id=blogtype.bt_id and blog.user_id=user.id order by bg_time desc limit 5
+    </select>
+
+    <select id="selelctByIdBlog" resultMap="BaseResultMap" parameterType="string">
+        select * from blog b LEFT JOIN blogtype bt on b.type_id=bt.bt_id left join user u on b.user_id=u.id where bt.bt_id=#{0} order by b.bg_time desc
+    </select>
+
+    <select id="selectAllBlog" resultMap="BaseResultMap">
+        select * from blog,blogtype,user where blog.type_id=blogtype.bt_id and blog.user_id=user.id order by blog.bg_time desc
+    </select>
+</mapper>

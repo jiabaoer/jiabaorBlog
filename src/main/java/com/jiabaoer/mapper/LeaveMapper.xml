@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiabaoer.mapper.LeaveMapper">
+    <resultMap id="BaseResultMap" type="com.jiabaoer.pojo.Leave">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="leave_text" property="leaveText" jdbcType="VARCHAR"/>
+        <result column="leave_time" property="leaveTime" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <collection property="user" ofType="com.jiabaoer.pojo.User">
+            <id column="id" property="id" jdbcType="VARCHAR"/>
+            <result column="email" property="email" jdbcType="VARCHAR"/>
+            <result column="password" property="password" jdbcType="VARCHAR"/>
+            <result column="headPictrue" property="headPictrue" jdbcType="VARCHAR"/>
+            <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+            <result column="usertype" property="userType" jdbcType="VARCHAR"/>
+            <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <sql id="leaveAndUser">
+        l.id,l.leave_text,l.leave_time,l.user_id,u.email,u.headPictrue,u.nickname,u.usertype
+    </sql>
+
+    <select id="selAllLeave" resultMap="BaseResultMap">
+        select
+        <include refid="leaveAndUser"/>
+        from leaveword l left join user u on u.id=l.user_id ORDER BY l.leave_time DESC
+    </select>
+
+    <select id="selectAllLeave" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="leaveAndUser"/>
+        from leaveword l left join user u on l.user_id=u.id
+        order by l.leave_time desc limit #{pageStart},#{pageSize}
+    </select>
+
+    <delete id="delLeaveByIdList" parameterType="java.util.List">
+        delete from leaveword
+        <where>
+            <foreach item="id" separator="," open="id in (" close=")" collection="list">#{id}</foreach>
+        </where>
+    </delete>
+</mapper>

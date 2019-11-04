@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiabaoer.mapper.PictureMapper">
+    <resultMap id="BaseResultMap" type="com.jiabaoer.pojo.Picture">
+        <id column="pId" property="id" jdbcType="VARCHAR"/>
+        <result column="pt_url" property="ptUrl" jdbcType="VARCHAR"/>
+        <result column="pt_time" property="updTime" jdbcType="VARCHAR"/>
+        <result column="am_id" property="amId" jdbcType="VARCHAR"/>
+        <association property="album" javaType="com.jiabaoer.pojo.Album">
+            <id column="id" property="id" jdbcType="VARCHAR"/>
+            <result column="am_title" property="amTitle" jdbcType="VARCHAR"/>
+            <result column="am_time" property="amTime" jdbcType="VARCHAR"/>
+            <result column="am_profile" property="amProfile" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+    <resultMap id="BaseResultPictureMap" type="com.jiabaoer.pojo.Picture">
+        <id column="pId" property="id" jdbcType="VARCHAR"/>
+        <result column="pt_url" property="ptUrl" jdbcType="VARCHAR"/>
+        <result column="am_id" property="amId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addPictureList" parameterType="java.util.List">
+        insert into picture values
+        <foreach collection="list" item="pt" index="index" separator=",">
+            (#{pt.id},#{pt.ptUrl},#{pt.updTime},#{pt.amId})
+        </foreach>
+    </insert>
+
+    <select id="selectAllPicture" resultMap="BaseResultMap" parameterType="map">
+    select * from picture p left join album b on p.am_id = b.id limit #{pageStart},#{pageSize}
+  </select>
+
+    <delete id="delPictureByIdList" parameterType="java.util.List">
+        delete from picture
+        <where>
+            <foreach item="id" separator="," open="pId in (" close=")" collection="list">#{id}</foreach>
+        </where>
+    </delete>
+</mapper>

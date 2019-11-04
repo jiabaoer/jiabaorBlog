@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiabaoer.mapper.CommentsMapper">
+    <resultMap id="BaseResultMap" type="com.jiabaoer.pojo.Comments">
+        <id column="com_id" property="comId" jdbcType="VARCHAR"/>
+        <result column="con_id" property="conId" jdbcType="VARCHAR"/>
+        <result column="com_time" property="comTime" jdbcType="VARCHAR"/>
+        <result column="com_text" property="comText" jdbcType="LONGVARCHAR"/>
+        <association property="blog" javaType="com.jiabaoer.pojo.Blog">
+            <id column="id" property="id" jdbcType="VARCHAR"/>
+            <result column="bg_title" property="bgTitle" jdbcType="VARCHAR"/>
+            <result column="bg_time" property="bgTime" jdbcType="VARCHAR"/>
+            <result column="bg_profile" property="bgProfile" jdbcType="VARCHAR"/>
+            <result column="bg_praise" property="bgPraise" jdbcType="BIGINT"/>
+            <result column="type_id" property="typeId" jdbcType="VARCHAR"/>
+            <result column="bg_content" property="bgContent" jdbcType="LONGVARCHAR"/>
+            <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        </association>
+        <collection property="user" javaType="com.jiabaoer.pojo.User">
+            <id column="id" property="id" jdbcType="VARCHAR"/>
+            <result column="email" property="email" jdbcType="VARCHAR"/>
+            <result column="headPictrue" property="headPictrue" jdbcType="VARCHAR"/>
+            <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+            <result column="usertype" property="userType" jdbcType="INTEGER"/>
+            <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+            <result column="profile" property="profile" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    com_id, con_id, com_time, com_text,comments.user_id ,id, bg_title, bg_time, bg_profile, bg_praise, type_id
+    </sql>
+
+    <select id="selectAllComments" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from comments left join blog on comments.con_id=blog.id
+        limit #{pageStart},#{pageSize}
+    </select>
+
+    <insert id="insertCommentsByBlogId" parameterType="com.jiabaoer.pojo.Comments">
+        insert into comments values(#{comId},#{conId},#{comText},#{comTime},#{userId})
+    </insert>
+
+    <select id="selectCommentsByBlogIdAndUser" resultMap="BaseResultMap">
+      select * from user u left join comments c on u.id=c.user_id where c.con_id=#{0}
+    </select>
+
+    <delete id="delCommentsByIdList" parameterType="java.util.List">
+        delete from comments
+        <where>
+            <foreach item="id" separator="," open="com_id in (" close=")" collection="list">#{id}</foreach>
+        </where>
+    </delete>
+</mapper>

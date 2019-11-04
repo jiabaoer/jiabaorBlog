@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <!--扫描包-前端控制器-->
+    <context:component-scan base-package="com.jiabaoer.controller"></context:component-scan>
+    <!--注解驱动，注册HandlerMapping和HandlerAdapter-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"></constructor-arg>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--资源映射-->
+    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+    <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
+    <mvc:resources mapping="/img/**" location="/img/"></mvc:resources>
+    <mvc:resources mapping="/font/**" location="/font/"></mvc:resources>
+    <mvc:resources mapping="/layui/**" location="/layui/"></mvc:resources>
+    <mvc:resources mapping="/layui/css/**" location="/layui/css/"></mvc:resources>
+    <mvc:resources mapping="/blogImage/**" location="/blogImage/"></mvc:resources>
+    <mvc:resources mapping="/picture/**" location="/picture/"></mvc:resources>
+    <!--文件上传配置,MultipartResovler解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSizePerFile" value="66133940"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="resolveLazily" value="true"></property>
+    </bean>
+    <!--配置视图解析器-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/page/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+</beans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiabaoer.mapper.FriendsMapper">
+    <resultMap id="BaseResultMap" type="com.jiabaoer.pojo.Friends">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="friend_url" property="friendUrl" jdbcType="VARCHAR"/>
+        <result column="friend_name" property="friendName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectAllFriends" resultMap="BaseResultMap">
+        select * from friends
+    </select>
+
+    <insert id="insertFriends" parameterType="com.jiabaoer.pojo.Friends">
+        insert into friends values(#{id},#{friendUrl},#{friendName})
+    </insert>
+
+    <update id="updateFirnds" parameterType="com.jiabaoer.pojo.Friends">
+        update friends set friend_url=#{friendUrl},friend_name=#{friendName}
+        <where>
+            id=#{id}
+        </where>
+    </update>
+</mapper>

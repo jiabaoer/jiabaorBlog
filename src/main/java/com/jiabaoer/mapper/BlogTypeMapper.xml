@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiabaoer.mapper.BlogTypeMapper">
+    <resultMap id="BaseResultMap" type="com.jiabaoer.pojo.BlogType">
+        <id column="bt_id" property="btId" jdbcType="VARCHAR"/>
+        <result column="bt_Name" property="btName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectAllBlogType" resultMap="BaseResultMap">
+    select * from blogtype
+    </select>
+
+    <select id="selectBlogTypePageInfo" parameterType="map" resultMap="BaseResultMap">
+        select * from blogtype limit #{pageStart},#{pageSize}
+    </select>
+
+    <update id="updateBlogTypeById">
+        update blogtype set bt_name = #{btName} where bt_id=#{btId}
+    </update>
+</mapper>

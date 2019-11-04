@@ -1,0 +1,246 @@
+/* 布局 */
+.site-tree-mobile, .site-tree-mobile1 {
+    display: none;
+}
+
+/* 头部 */
+.header {
+    height: 59px;
+    border-bottom: 1px solid #404553;
+    background-color: #393D49;
+}
+
+.logo {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-size: 15px;
+    color: orange;
+    width: 150px;
+}
+
+.logo img {
+    width: 82px;
+    height: 31px;
+}
+
+.header .layui-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    background: none;
+}
+
+.header .layui-nav .layui-nav-item {
+    margin: 0 20px;
+}
+
+.header .layui-nav .layui-nav-item[mobile] {
+    display: none;
+}
+
+.header .layui-container .logo {
+    left: 15px;
+}
+
+.header .layui-container .layui-nav {
+    right: 15px;
+}
+
+.menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 65px;
+}
+
+.header-demo {
+    height: 60px;
+    border-bottom: none;
+}
+
+.header-demo .logo {
+    left: 30px;
+}
+
+.header-demo .layui-nav {
+    top: 0;
+}
+
+.header-demo .layui-nav .layui-nav-item {
+    margin: 0 10px;
+}
+
+.header-demo .layui-nav .layui-this a {
+    padding: 0 30px;
+}
+
+.site-union {
+    color: #999;
+}
+
+.site-union > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.site-union a[sponsor] img {
+    width: 80px;
+}
+
+.site-union span {
+    position: relative;
+    top: 5px;
+}
+
+.site-union span a {
+    padding: 0;
+    display: inline;
+    color: #999;
+}
+
+.site-union span a:hover {
+    text-decoration: underline;
+}
+
+.site-union .site-union-desc {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.layui-icon-spread-left {
+    display: none;
+}
+
+/* 适配多设备 */
+@media screen and (max-width: 750px) {
+    .layui-icon-spread-left {
+        display: block;
+    }
+
+    .layui-btn {
+        display: inline-block;
+        height: 38px;
+        line-height: 38px;
+        padding: 0px 3px;
+    }
+
+    .layui-table td, .layui-table th {
+        position: relative;
+        padding: 10px;
+        line-height: 20px;
+        font-size: 10px;
+    }
+
+    .logo,
+    .header-demo .logo {
+        left: 10px;
+    }
+
+    .header .layui-nav-child {
+        left: auto;
+        right: 0;
+    }
+
+    .site-demo-overflow {
+        overflow: auto;
+    }
+
+    .site-nav-layim {
+        display: none !important;
+    }
+
+    .header .layui-nav .layui-nav-item {
+        margin: 0;
+    }
+
+    .header .layui-nav .layui-nav-item a {
+        padding: 0 20px;
+    }
+
+    .header .layui-nav .layui-nav-item[pc] {
+        display: none;
+    }
+
+    .header .layui-nav .layui-nav-item[mobile] {
+        display: inline-block;
+    }
+
+    .site-tree-mobile {
+        display: block;
+        position: fixed;
+        z-index: 100000;
+        bottom: 70px;
+        left: 15px;
+        width: 40px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 2px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .7);
+        color: #fff;
+    }
+
+    .site-close-mobile {
+        position: fixed;
+        z-index: 100000;
+        bottom: 70px;
+        left: 15px;
+        width: 40px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 2px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .7);
+        color: #fff;
+    }
+
+    .layui-layout-admin .layui-side {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        transition: all .3s;
+        -webkit-transition: all .3s;
+        z-index: 10000;
+    }
+
+    .site-mobile .layui-side {
+        left: 0;
+    }
+
+    .layui-input-block {
+        z-index: 9999;
+    }
+
+}
+
+@media screen and (min-width: 780px ) and (max-width: 1200px) {
+    .layui-table {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 750px ) and (max-width: 780px) {
+    .layui-table {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+    .layui-body {
+        left: 0;
+    }
+
+    .layui-icon-spread-left {
+        display: block;
+    }
+
+    .layui-table td, .layui-table th {
+        position: relative;
+        padding: 1px;
+        line-height: 20px;
+        font-size: 10px;
+    }
+}

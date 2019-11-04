@@ -1,0 +1,147 @@
+.infosbox {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .17);
+}
+
+.newsview {
+    padding: 0 30px
+}
+
+.r_box {
+    margin: 10px;
+}
+
+.news_con a {
+    color: #0e6dad
+}
+
+.news_con a:hover {
+    color: #000
+}
+
+.news_title {
+    font-size: 24px;
+    font-weight: normal;
+    padding: 20px 0;
+    color: #333;
+}
+
+.bloginfo {
+    width: 100%;
+    overflow: hidden
+}
+
+.bloginfo li {
+    float: left;
+    margin-right: 20px
+}
+
+.news_about {
+    color: #888888;
+    border: 1px solid #F3F3F3;
+    padding: 10px;
+    margin: 20px auto 15px auto;
+    line-height: 23px;
+    background: none repeat 0 0 #F6F6F6;
+}
+
+.news_about strong {
+    color: #38485A;
+    font-weight: 400 !important;
+    padding-right: 8px;
+}
+
+.diggit {
+    width: 160px;
+    margin: auto;
+    background: #E2523A;
+    color: #fff;
+    box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.diggit a {
+    color: #fff;
+}
+
+.tags a {
+    background: #F4650E;
+    padding: 3px 8px;
+    margin: 0 5px 0 0;
+    color: #fff;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.firsttop_left {
+    width: 300px;
+    height: 250px;
+    margin-right: 30px;
+    overflow: hidden;
+    float: left;
+}
+
+.returnbtn {
+    margin-top: 35px;
+    margin-left: 50px;
+}
+
+.returnbtn a {
+    width: 115px;
+    height: 22px;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    line-height: 22px;
+    text-align: center;
+    color: White;
+    font-size: 16px;
+    display: block;
+}
+
+.returnbtn a:hover {
+    color: #FF702D;
+    text-decoration: underline;
+    border: 1px solid #8d5a00;
+}
+
+.pictext ul {
+    padding: 20px
+}
+
+.diggit {
+    width: 160px;
+    margin: auto;
+    background: #E2523A;
+    color: #fff;
+    box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.diggit a {
+    color: #fff;
+}
+
+#diggnum {
+    margin: 5px;
+}
+
+.infosbox img {
+    max-width: 100%;
+    height: auto;
+}
+
+article {
+    width: 1000px;
+    margin: 80px auto 0;
+    overflow: hidden;
+    zoom: 1;
+}

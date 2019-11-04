@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiabaoer.mapper.AlbumMapper">
+    <resultMap id="BaseResultMap" type="com.jiabaoer.pojo.Album">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="am_title" property="amTitle" jdbcType="VARCHAR"/>
+        <result column="am_time" property="amTime" jdbcType="VARCHAR"/>
+        <result column="am_coverFile" property="amCoverFile" jdbcType="VARCHAR"/>
+        <result column="am_profile" property="amProfile" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <collection property="pictureList" ofType="com.jiabaoer.pojo.Picture">
+            <id column="pId" property="id" jdbcType="VARCHAR"/>
+            <result column="pt_url" property="ptUrl" jdbcType="VARCHAR"/>
+            <result column="am_id" property="amId" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <resultMap id="BaseAlbumResultMap" type="com.jiabaoer.pojo.Album">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="am_title" property="amTitle" jdbcType="VARCHAR"/>
+        <result column="am_time" property="amTime" jdbcType="VARCHAR"/>
+        <result column="am_coverFile" property="amCoverFile" jdbcType="VARCHAR"/>
+        <result column="am_profile" property="amProfile" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="showAllAlbum" resultMap="BaseResultMap" parameterType="map">
+    select * from album limit #{pageStart},#{pageSize}
+  </select>
+
+    <select id="selectAllAlbum" resultMap="BaseAlbumResultMap">
+    select * from album
+  </select>
+
+    <select id="showAlbumAllPictureById" resultMap="BaseResultMap" parameterType="string">
+        select * from album a left join picture p on a.id=p.am_id
+        <where>
+            a.id=#{0}
+        </where>
+    </select>
+
+</mapper>

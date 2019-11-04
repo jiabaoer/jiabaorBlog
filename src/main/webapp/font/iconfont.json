@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5344647",
+      "name": "San Mi App glyph ico",
+      "font_class": "SanMiAppglyphico",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "5344648",
+      "name": "San Mi App glyph ico",
+      "font_class": "SanMiAppglyphico1",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "5344649",
+      "name": "San Mi App glyph ico",
+      "font_class": "SanMiAppglyphico2",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "5344659",
+      "name": "San Mi App glyph ico",
+      "font_class": "SanMiAppglyphico3",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "5344662",
+      "name": "San Mi App glyph ico",
+      "font_class": "SanMiAppglyphico4",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    }
+  ]
+}
